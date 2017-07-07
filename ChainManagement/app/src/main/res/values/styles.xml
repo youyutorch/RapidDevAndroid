@@ -1,0 +1,8 @@
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorAccent">#9dd1ee</item>
+        <item name="textColorError">@color/design_textinput_error_color_light</item>
+    </style>
+
+</resources>

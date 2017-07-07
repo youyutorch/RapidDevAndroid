@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">微服私访</string>
+
+    <string name="login_name_hint">请输入用户名</string>
+    <string name="login_password_hint">请输入密码</string>
+    <string name="btn_login">登 录</string>
+    <string name="btn_register">注 册</string>
+</resources>
