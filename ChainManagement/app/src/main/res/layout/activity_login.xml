@@ -88,4 +88,9 @@
         </LinearLayout>
 
     </ScrollView>
+
+    <include
+        android:id="@+id/loading"
+        layout="@layout/progressbar_custom_rl"
+        android:visibility="gone" />
 </RelativeLayout>

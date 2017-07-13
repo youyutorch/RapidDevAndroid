@@ -8,4 +8,7 @@
     <color name="login_user">#9dd1ee</color>
     <color name="login_user_bg">#2a96c5</color>
     <color name="login_btn_register">#ffffff</color>
+    <color name="bottom_all_bg_color_normal">#8c9092</color>
+    <color name="menu_item_white_pressed">#f3f3f3</color>
+
 </resources>
