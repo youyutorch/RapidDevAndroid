@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#2a96c5</color>
+    <color name="colorPrimaryDark">#2a96c5</color>
+    <color name="colorAccent">#2a96c5</color>
+    <color name="white">#FFFFFF</color>
 
     <color name="login_background">#3caee2</color>
     <color name="login_user">#9dd1ee</color>
@@ -10,5 +11,12 @@
     <color name="login_btn_register">#ffffff</color>
     <color name="bottom_all_bg_color_normal">#8c9092</color>
     <color name="menu_item_white_pressed">#f3f3f3</color>
+
+    <!--Bottom-->
+    <color name="color_bottom_layout_bg">#F2F2F2</color>
+    <color name="bottom_text_color">#666666</color>
+
+    <!--MainActivity-->
+    <color name="gray_bg">#efe7e3</color>
 
 </resources>
