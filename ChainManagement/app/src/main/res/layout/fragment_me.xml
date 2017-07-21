@@ -1,19 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/root_layout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical">
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/root_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv"
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="个人中心"
-        android:textColor="@color/colorPrimary"
-        android:textSize="22sp" />
+        android:background="#f2f2f2">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/iv_header"
+                    android:layout_width="@dimen/width_120"
+                    android:layout_height="@dimen/height_120"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:src="@drawable/defaulthead"/>
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_7"
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="#110d0a"
+                    android:textSize="@dimen/textsize_16"/>
+
+                <TextView
+                    android:id="@+id/tv_job"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center"
+                    android:padding="@dimen/margin_13"
+                    android:text=""
+                    android:textColor="@color/text_color_9"
+                    android:textSize="@dimen/textsize_14"/>
+            </LinearLayout>
+
+            <com.torch.chainmanage.view.SetItemView
+                android:id="@+id/rl_me"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:isShowUnderLine="false"
+                app:leftIcon="@drawable/medata"
+                app:leftText="@string/fragment_me_tv_me"
+                app:rightIcon="@drawable/task_arrow"
+                app:textColor="@color/text_color_6"
+                app:textSize="16"/>
+
+            <com.torch.chainmanage.view.SetItemView
+                android:id="@+id/rl_clear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                app:leftIcon="@drawable/clearcache"
+                app:leftText="@string/fragment_me_tv_clear"
+                app:rightIcon="@drawable/task_arrow"
+                app:textColor="@color/text_color_6"
+                app:textSize="16"/>
+
+            <com.torch.chainmanage.view.SetItemView
+                android:id="@+id/rl_feedback"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:leftIcon="@drawable/appfeedback"
+                app:leftText="@string/fragment_me_tv_feedback"
+                app:rightIcon="@drawable/task_arrow"
+                app:textColor="@color/text_color_6"
+                app:textSize="16"/>
+
+            <com.torch.chainmanage.view.SetItemView
+                android:id="@+id/rl_about"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:leftIcon="@drawable/about"
+                app:leftText="@string/fragment_me_tv_about"
+                app:rightIcon="@drawable/task_arrow"
+                app:textColor="@color/text_color_6"
+                app:textSize="16"/>
+
+            <com.torch.chainmanage.view.SetItemView
+                android:id="@+id/rl_version"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:leftIcon="@drawable/newversion"
+                app:leftText="@string/fragment_me_tv_version"
+                app:rightIcon="@drawable/task_arrow"
+                app:textColor="@color/text_color_6"
+                app:textSize="16"/>
+
+            <com.torch.chainmanage.view.SetItemView
+                android:id="@+id/rl_exit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:layout_marginTop="14dp"
+                app:isShowUnderLine="false"
+                app:leftIcon="@drawable/appexit"
+                app:leftText="@string/fragment_me_tv_exit"
+                app:rightIcon="@drawable/task_arrow"
+                app:textColor="@color/text_color_6"
+                app:textSize="16"/>
+        </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>

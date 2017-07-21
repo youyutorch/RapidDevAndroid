@@ -11,8 +11,8 @@ public class RequestUrl {
     public static final int HttpFail = 7001;//失败
 
 
-    public static final String BaseUrl = "http://192.168.43.232:8080";//模拟器根接口
-//    public static final String BaseUrl = "http://192.168.9.232:8080";//根接口
+    public static final String BaseUrl = "http://192.168.17.124:8080";//模拟器根接口
+//    public static final String BaseUrl = "http://www.mofada.cn:8080";//远程服务器根接口
 
     public static final String Login = BaseUrl + "/visitshop/login";//登录get
     public static final String FeedBack = BaseUrl + "/visitshop/feedback";//意见反馈post

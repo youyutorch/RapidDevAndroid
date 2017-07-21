@@ -39,7 +39,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends BaseFragmentActivity implements View.OnClickListener {
     private static final String TAG = "LoginActivity";
     private TextInputLayout mUsernameLayout;
     private TextInputEditText mUsernameText;
@@ -84,6 +84,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         initView();
         //判断是否已登录
         String userId = SharePreUtil.GetShareString(this, "userId");
+        userId = "num01";
         if (!TextUtils.isEmpty(userId)) {
             //跳转到主页面
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);

@@ -5,6 +5,28 @@
     android:background="@color/white"
     android:orientation="vertical">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/home_fragment_viewpager_h">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/fragment_img_viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/color_bottom_layout_bg"
+            />
+
+        <LinearLayout
+            android:id="@+id/fragment_point_subscript"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/home_fragment_point_bottom"
+            android:background="@color/bottom_text_color"
+            android:orientation="horizontal"/>
+    </RelativeLayout>
+
     <TextView
         android:id="@+id/tv"
         android:layout_width="match_parent"

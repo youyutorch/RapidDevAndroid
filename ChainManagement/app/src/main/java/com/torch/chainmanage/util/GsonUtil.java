@@ -7,9 +7,14 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.torch.chainmanage.http.bean.LoginResult;
+import com.torch.chainmanage.http.bean.NoticeResult;
+import com.torch.chainmanage.model.NoticeImage;
 import com.torch.chainmanage.model.User;
 
 import org.json.JSONException;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * desc: 用于json字符串的解析
@@ -51,6 +56,43 @@ public class GsonUtil {
                 return user;
             } else {
                 sReason = loginResult.getMsg() + loginResult.getCode();
+            }
+        }
+
+        return null;
+    }
+
+    public static List<NoticeImage> parseNoticeJson(String json) {
+        sReason = null;
+        if (TextUtils.isEmpty(json)) {
+            return null;
+        }
+
+        NoticeResult noticeResult = null;
+        try {
+            noticeResult = sGson.fromJson(json, NoticeResult.class);
+        } catch (JsonSyntaxException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        //利用noticeResult对象，构造NoticeImage对象
+        if (noticeResult != null) {
+            if (noticeResult.getCode() == 0) {
+                //成功获取到图片地址信息
+                List<NoticeImage> images = new ArrayList<>();
+                List<NoticeResult.BodyBean> bodyBeans = noticeResult.getBody();
+                if (bodyBeans != null) {
+                    for (NoticeResult.BodyBean bodyBean : bodyBeans) {
+                        NoticeImage image = new NoticeImage();
+                        image.setId(bodyBean.getId());
+                        image.setImgUrl(bodyBean.getImgUrl());
+                        images.add(0, image);
+                    }
+                }
+                return images;
+            } else {
+                sReason = noticeResult.getMsg() + noticeResult.getCode();
             }
         }
 

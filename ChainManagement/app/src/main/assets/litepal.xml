@@ -33,6 +33,7 @@
     -->
     <list>
         <mapping class="com.torch.chainmanage.model.User" />
+        <mapping class="com.torch.chainmanage.model.NoticeImage" />
     </list>
 
     <!--

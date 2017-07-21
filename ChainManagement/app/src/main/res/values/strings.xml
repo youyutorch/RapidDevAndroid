@@ -5,4 +5,113 @@
     <string name="login_password_hint">请输入密码</string>
     <string name="btn_login">登 录</string>
     <string name="btn_register">注 册</string>
+
+    <string name="txt_home">首页</string>
+    <string name="txt_shop">巡店</string>
+    <string name="txt_visit">拜访</string>
+    <string name="txt_train">培训</string>
+    <string name="txt_me">个人中心</string>
+
+    <!-- xlistview -->
+    <string name="xlistview_header_hint_normal">按下刷新</string>
+    <string name="xlistview_header_hint_ready">正在刷新数据</string>
+    <string name="xlistview_header_hint_loading">加载中。。。</string>
+    <string name="xlistview_footer_hint_normal">查看更多</string>
+    <string name="xlistview_footer_hint_ready">正在加载更多</string>
+    <string name="xlistview_footer_hint_nomore">已全部加载</string>
+    <!--home fragment-->
+    <string name="fragment_home_info">最新资讯</string>
+    <string name="fragment_home_task">最新任务</string>
+    <string name="fragment_home_more">更多</string>
+    <!--create visit activity-->
+    <string name="activity_createvisit_shopname">店面名称：</string>
+    <string name="activity_createvisit_shopname_hint">请输入店面名称</string>
+    <string name="activity_createvisit_shopid">店面编号：</string>
+    <string name="activity_createvisit_shopwhere">店面位置：</string>
+    <string name="activity_createvisit_shopwhere_hint">详细地址（如门牌号等）</string>
+    <string name="activity_createvisit_title_img">图片采集</string>
+    <string name="activity_createvisit_title_score">评分&#038;意见反馈</string>
+    <string name="activity_createvisit_score_shop">店面整洁：</string>
+    <string name="activity_createvisit_score_person">人员服务：</string>
+    <string name="activity_createvisit_score_product">产品推荐：</string>
+    <string name="activity_createvisit_edit_hint">请输入您的反馈，最多500字。\n点击时弹出软键盘。</string>
+    <string name="activity_createvisit_save">临时保存</string>
+    <string name="activity_createvisit_submit">立即提交</string>
+    <string name="activity_visitshop_search">输入店铺名称或ID搜索</string>
+    <!--activity train detil-->
+    <string name="activity_train_detil_score">您对本次服务打分：</string>
+
+    <!--toast语句-->
+    <string name="search_none">没有搜到相关信息</string>
+    <string name="please_resubmit">网络不给力，请重新提交</string>
+    <string name="please_login">你尚未登录,请先登录</string>
+    <string name="http_failed_click_refresh">联网失败\n点击刷新</string>
+    <string name="http_failed_refresh">网络请求失败，点击刷新</string>
+    <string name="please_into_userinfo">请输入店名</string>
+    <string name="http_failed">网络请求失败，请检查网络</string>
+    <string name="image_no_exist">图片已不存在</string>
+    <string name="photo_help_text">&#160;&#160;&#160;&#160;注意：拍照不得少于2张，为培训开始一张和培训结束一张。第一张和最后一张时间间隔不得少于1分钟</string>
+
+    <!--activity AppFeedbackActivity-->
+    <string name="activity_appfeedback_tv_tip">欢迎您提出宝贵的意见：</string>
+    <string name="activity_appfeedback_et_tip">请您留下宝贵的意见和建议，我们将努力改进,不超过200字</string>
+    <string name="activity_appfeedback_btn_submit">提交</string>
+    <string name="activity_appfeedback_tv_other">您还可以通过以下方式和我们联系:</string>
+
+    <!--activity InterviewDetailActivity-->
+    <string name="activity_interviewdetail_tv_title">拜访标题:</string>
+    <string name="activity_interviewdetail_tv_title_hint">请输入拜访标题</string>
+    <string name="activity_interviewdetail_tv_people">拜访人:</string>
+    <string name="activity_interviewdetail_tv_people_hint">请输入拜访人姓名</string>
+    <string name="activity_interviewdetail_tv_phone">联系方式:</string>
+    <string name="activity_interviewdetail_tv_phone_hint">请输入拜访对象手机号</string>
+    <string name="activity_interviewdetail_tv_company">公司名称:</string>
+    <string name="activity_interviewdetail_tv_company_hint">请输入拜访对象公司名</string>
+    <string name="activity_interviewdetail_tv_job">职        务:</string>
+    <string name="activity_interviewdetail_tv_job_hint">请输入拜访对象职务</string>
+    <string name="activity_interviewdetail_tv_aim">拜访目的:</string>
+    <string name="activity_interviewdetail_tv_aim_hint">请输入拜目的,不超过200字</string>
+    <string name="activity_interviewdetail_tv_summary">拜访总结:</string>
+    <string name="activity_interviewdetail_tv_summary_hint">请输入拜访总结，不超过500字</string>
+
+    <!--activity MeDataActivity-->
+    <string name="activity_medata_tv_name">用户名</string>
+    <string name="activity_medata_tv_nickname">昵   称</string>
+    <string name="activity_medata_tv_phone">手机号</string>
+    <string name="activity_medata_tv_sex">性   别</string>
+    <string name="activity_medata_tv_role">职   务</string>
+    <string name="activity_medata_tv_area">分   区</string>
+    <string name="activity_medata_btn_submit">提交</string>
+
+    <!--activity TaskActivity-->
+    <string name="activity_task_tv_title">任务名称: </string>
+    <string name="activity_task_tv_data">发布时间: </string>
+    <!--activity TaskDetailActivity-->
+    <string name="activity_taskdetail_tv_title">任务名称 : </string>
+    <string name="activity_taskdetail_tv_data">执行时间: </string>
+    <string name="activity_taskdetail_tv_state">任务状态: </string>
+    <string name="activity_taskdetail_tv_desc">任务描述: </string>
+    <!--fragment MeFragment-->
+    <string name="fragment_me_tv_me">个人资料 </string>
+    <string name="fragment_me_tv_clear">清除缓存 </string>
+    <string name="fragment_me_tv_feedback">意见反馈 </string>
+    <string name="fragment_me_tv_about">关于APP </string>
+    <string name="fragment_me_tv_version">新版本检测 </string>
+    <string name="fragment_me_tv_exit">退出应用 </string>
+    <!--popwindow updateAPP-->
+    <string name="popwindow_update_tv_title">发现新版本 </string>
+    <string name="popwindow_update_btn_later">稍后再说 </string>
+    <string name="popwindow_update_btn_update">立即更新 </string>
+
+    <!-- activity LoginActivity -->
+    <string name="activity_login_et_name_hint">请输入用户名 </string>
+    <string name="activity_login_et_password_hint">请输入密码 </string>
+    <string name="activity_login_et_btn_login">登录</string>
+    <string name="activity_login_et_btn_regist">注册</string>
+    <!-- activity AboutActivity -->
+    <string name="activity_about_appinfo">      微服私访是一款集巡店、培训、拜访于一体的店铺管理软件。软件支持多平台、多店铺的管理。包含了公司及行业的一些资讯动态。拥有添加或查看店铺的最新动态、对拜访过的店铺和进行培训的店铺进行详细记录存储的功能。\n      软件其具有完备功能、实用简单、实用方便、上手快的特点，是小型企业、店铺理想的管理软件。</string>
+    <!-- dialog exit-->
+    <string name="dialog_exit_title">是否退出应用</string>
+    <string name="dialog_exit_cancel">取消</string>
+    <string name="dialog_exit_positive">确定</string>
 </resources>

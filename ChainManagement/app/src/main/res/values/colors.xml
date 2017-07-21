@@ -19,4 +19,14 @@
     <!--MainActivity-->
     <color name="gray_bg">#efe7e3</color>
 
+    <!--TaskActivity-->
+    <color name="bg_checked">#f0efef</color>
+    <color name="item_text_title">#666666</color>
+    <color name="item_text_date">#999999</color>
+    <color name="taskdetail_text_color">#666666</color>
+    <color name="text_color_3">#333333</color>
+    <color name="text_color_6">#666666</color>
+    <color name="text_color_9">#999999</color>
+    <color name="text_color_c">#cccccc</color>
+
 </resources>
