@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_root_home"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/title_bar_back_bottom"
+        android:paddingTop="@dimen/title_bar_back_bottom">
+
+        <TextView
+            android:id="@+id/fragment_home_task_item_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/fragment_home_task_item_arrow"
+            android:singleLine="true"
+            android:text="Large Text"
+            android:textSize="@dimen/home_fragment_info_item_size" />
+
+        <ImageView
+            android:id="@+id/fragment_home_task_item_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/title_bar_add_padding"
+            android:src="@drawable/selector_item_img" />
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/item_home_task"
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_alignParentBottom="true"
+        android:background="@color/gray_bg" />
+
+</RelativeLayout>

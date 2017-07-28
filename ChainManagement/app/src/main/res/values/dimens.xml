@@ -9,6 +9,15 @@
     <dimen name="login_btn_marginTop">24dp</dimen>
     <dimen name="login_text_size">14sp</dimen>
 
+    <!-- 标题栏 padding -->
+    <dimen name="padding_maintop_small">4dp</dimen>
+    <dimen name="padding_maintop">4dp</dimen>
+    <dimen name="login_padding_maintop">6dp</dimen>
+    <dimen name="more_back">16dp</dimen>
+    <dimen name="more_back_left">4dp</dimen>
+    <dimen name="title_bar_height_min">52dp</dimen>
+    <dimen name="title_bar_right_size">18sp</dimen>
+
     <!--TitleBar-->
     <dimen name="title_bar_h">43dp</dimen>
     <dimen name="title_bar_histroy_right">16dp</dimen>
@@ -27,6 +36,9 @@
     <dimen name="bottom_img_left">24dp</dimen>
     <dimen name="bottom_text_size">11sp</dimen>
 
+    <!--MainActivity-->
+    <dimen name="home_fragment_item_info_padding">6dp</dimen>
+
     <!--HomeFragment-->
     <dimen name="home_fragment_viewpager_h">166dp</dimen>
     <dimen name="home_fragment_point_bottom">12dp</dimen>
@@ -35,6 +47,20 @@
     <dimen name="home_fragment_item_size">12sp</dimen>
     <dimen name="home_fragment_title_left">23dp</dimen>
     <dimen name="home_fragment_info_item_size">14sp</dimen>
+
+    <!--VisitShopActivity-->
+    <dimen name="shop_activity_search_left">62dp</dimen>
+    <dimen name="shop_activity_search_padding">9dp</dimen>
+    <dimen name="shop_activity_item_padding">15dp</dimen>
+    <dimen name="shop_activity_item_top">8dp</dimen>
+    <dimen name="line_padding">2dp</dimen>
+    <dimen name="edittext_input_padding">4dp</dimen>
+
+    <!--ShopDetailActivity-->
+    <dimen name="shop_detail_up_bottom">7dp</dimen>
+    <dimen name="shop_detail_title_h">31dp</dimen>
+    <dimen name="shop_detail_imgs_top">16dp</dimen>
+    <dimen name="shop_detail_imgs_spac">1dp</dimen>
 
     <!-- common -->
     <dimen name="textsize_12">12sp</dimen>

@@ -34,6 +34,9 @@
     <list>
         <mapping class="com.torch.chainmanage.model.User" />
         <mapping class="com.torch.chainmanage.model.NoticeImage" />
+        <mapping class="com.torch.chainmanage.model.Task" />
+        <mapping class="com.torch.chainmanage.model.Info" />
+        <mapping class="com.torch.chainmanage.model.ShopInfo" />
     </list>
 
     <!--

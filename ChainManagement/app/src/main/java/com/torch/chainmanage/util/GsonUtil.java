@@ -6,9 +6,13 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
+import com.torch.chainmanage.http.bean.InfoResult;
 import com.torch.chainmanage.http.bean.LoginResult;
 import com.torch.chainmanage.http.bean.NoticeResult;
+import com.torch.chainmanage.http.bean.TaskResult;
+import com.torch.chainmanage.model.Info;
 import com.torch.chainmanage.model.NoticeImage;
+import com.torch.chainmanage.model.Task;
 import com.torch.chainmanage.model.User;
 
 import org.json.JSONException;
@@ -93,6 +97,58 @@ public class GsonUtil {
                 return images;
             } else {
                 sReason = noticeResult.getMsg() + noticeResult.getCode();
+            }
+        }
+
+        return null;
+    }
+
+    public static List<Task> parseTaskJson(String json) {
+        sReason = null;
+        if (TextUtils.isEmpty(json)) {
+            return null;
+        }
+
+        TaskResult taskResult = null;
+        try {
+            taskResult = sGson.fromJson(json, TaskResult.class);
+        } catch (JsonSyntaxException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        if (taskResult != null) {
+            if (taskResult.getCode() == 0) {
+                //成功获取到Task信息
+                return taskResult.getBody();
+            } else {
+                sReason = taskResult.getMsg() + taskResult.getCode();
+            }
+        }
+
+        return null;
+    }
+
+    public static List<Info> parseInfoJson(String json) {
+        sReason = null;
+        if (TextUtils.isEmpty(json)) {
+            return null;
+        }
+
+        InfoResult infoResult = null;
+        try {
+            infoResult = sGson.fromJson(json, InfoResult.class);
+        } catch (JsonSyntaxException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        if (infoResult != null) {
+            if (infoResult.getCode() == 0) {
+                //成功获取到Info信息
+                return infoResult.getBody();
+            } else {
+                sReason = infoResult.getMsg() + infoResult.getCode();
             }
         }
 

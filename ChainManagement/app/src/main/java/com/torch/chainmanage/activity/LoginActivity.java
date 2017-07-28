@@ -84,7 +84,6 @@ public class LoginActivity extends BaseFragmentActivity implements View.OnClickL
         initView();
         //判断是否已登录
         String userId = SharePreUtil.GetShareString(this, "userId");
-        userId = "num01";
         if (!TextUtils.isEmpty(userId)) {
             //跳转到主页面
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);

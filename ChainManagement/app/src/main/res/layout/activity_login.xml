@@ -36,6 +36,7 @@
                     android:id="@+id/et_username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
                     android:hint="@string/login_name_hint"
                     android:textSize="@dimen/login_text_size"/>
 
@@ -55,6 +56,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
+                    android:gravity="center_horizontal"
                     android:hint="@string/login_password_hint"
                     android:textSize="@dimen/login_text_size"/>
 

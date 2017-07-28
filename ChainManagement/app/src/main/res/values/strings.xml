@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">微服私访</string>
+    <string name="app_name">连锁店管理</string>
 
     <string name="login_name_hint">请输入用户名</string>
     <string name="login_password_hint">请输入密码</string>

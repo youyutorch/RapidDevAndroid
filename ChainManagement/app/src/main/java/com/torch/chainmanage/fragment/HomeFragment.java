@@ -6,6 +6,8 @@ import android.os.Message;
 import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,16 +16,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.torch.chainmanage.R;
-import com.torch.chainmanage.activity.LoginActivity;
+import com.torch.chainmanage.adapter.InfoListBaseAdapter;
+import com.torch.chainmanage.adapter.TaskListBaseAdapter;
 import com.torch.chainmanage.constant.RequestUrl;
 import com.torch.chainmanage.http.OkHttpHelper;
+import com.torch.chainmanage.model.Info;
 import com.torch.chainmanage.model.NoticeImage;
+import com.torch.chainmanage.model.Task;
 import com.torch.chainmanage.util.GsonUtil;
 import com.torch.chainmanage.util.ImageLoader;
+import com.torch.chainmanage.util.SharePreUtil;
 import com.torch.chainmanage.util.WebPageHelper;
+import com.torch.chainmanage.view.AutoLinearLayoutManager;
+import com.torch.chainmanage.view.PartScrollView;
 
 import org.litepal.crud.DataSupport;
 
@@ -38,10 +48,15 @@ import java.util.TimerTask;
  * 首页--默认展示
  */
 
-public class HomeFragment extends BaseFragment implements ViewPager.OnPageChangeListener {
+public class HomeFragment extends BaseFragment implements ViewPager.OnPageChangeListener, View.OnClickListener {
 
     public static final int MSG_UPDATE_VEEWPAGE = 0;
-    private View view;
+    private View mFragmentView; //当前fragment
+    private RelativeLayout mLoadingProgress; //加载框
+    private LinearLayout mFailedTip; //网络访问失败提示
+    private PartScrollView mPartScrollView;
+    
+    /** 公告图相关 **/
     private List<ImageView> mNoticeImgs = new ArrayList<>(); //公告图列表
     private List<NoticeImage> mImageUrls; //公告图地址列表
     private List<String> mLinkUrls; //广告链接地址，一般由服务器返回，这里由客户端模拟
@@ -50,6 +65,27 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
     private boolean mIsAutoSlide = true; //是否自主轮播
     private int mCurrPosition = 1;
     private Timer mTimer;
+
+    /** 巡店、拜访、培训 **/
+    private TextView mNewShopView;
+    private TextView mNewVisitView;
+    private TextView mTrainView;
+
+    /** 任务类 **/
+    private RelativeLayout mTaskLayout;
+    private RecyclerView mTaskRecyclerView;
+    private TextView mTaskDetailView; //更多
+    private List<Task> mTaskList; //任务列表
+    private TaskListBaseAdapter mTaskAdapter;
+
+    /** 资讯类 **/
+    private List<Info> mInfoList; //资讯列表
+    private TextView mInfoDetailView;
+    private RecyclerView mInfoRecyclerView;
+    private InfoListBaseAdapter mInfoAdapter;
+    private String mUserId; //用户id
+    
+    private int mShowSize = 3;
 
     private Handler mHandler = new Handler() {
         @Override
@@ -129,18 +165,132 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.d(TAG, "onCreateView - " + mFragmentName);
-        if (view == null) {
-            view = inflater.inflate(R.layout.fragment_home, container, false);
-            initView(view);
-            getNoticeImgs();
+        if (mFragmentView == null) {
+            mFragmentView = inflater.inflate(R.layout.fragment_home, container, false);
+            initView(mFragmentView);
+            initScreenListener();
+            mLoadingProgress.setVisibility(View.VISIBLE); //显示加载框
+            requestNoticeImgs(); //请求公告图
+            requestTask(); //请求任务
+            requestInfo(); //请求资讯
         }
-        return view;
+        return mFragmentView;
+    }
+
+    private void initScreenListener() {
+        mPartScrollView.setScreenListener(new PartScrollView.ScreenListener() {
+            @Override
+            public int getMaxScreenY() {
+                int height = mTaskRecyclerView.getHeight();
+                int[] location = new int[]{0, 0};
+                mTaskRecyclerView.getLocationOnScreen(location);
+                Log.d(TAG, "getMaxScreenY - location[1]=" + location[1] + ",height=" + height);
+                return location[1] + height;
+            }
+        });
+    }
+
+    private void requestInfo() {
+        Log.i(TAG, "requestInfo - 请求获取资讯");
+        String url = RequestUrl.Info + "?pagenum=1&type=0"; //获取公司第一页动态
+        OkHttpHelper.getInstance().doGet(url, new OkHttpHelper.RequestCallback() {
+            @Override
+            public void onSuccess(String result) {
+                Log.d(TAG, "requestInfo onSuccess 成功获取资讯 - " + result);
+
+                mInfoList = GsonUtil.parseInfoJson(result);
+                if (mInfoList == null) {
+                    //从数据库中读取
+                    mInfoList = DataSupport.findAll(Info.class);
+                } else {
+                    //更新到数据库
+                    DataSupport.deleteAll(Info.class);
+                    DataSupport.saveAll(mInfoList);
+                }
+                showInfoList(mInfoList);
+            }
+
+            @Override
+            public void onFailure(IOException e) {
+                Log.w(TAG, "requestInfo onFailure 获取资讯失败");
+                e.printStackTrace();
+
+                //从数据库中读取
+                mInfoList = DataSupport.findAll(Info.class);
+                showInfoList(mInfoList);
+            }
+        });
+    }
+
+    /**
+     * 显示资讯列表
+     * @param infoList
+     */
+    private void showInfoList(List<Info> infoList) {
+        //关闭加载框
+        mLoadingProgress.setVisibility(View.GONE);
+
+        mInfoAdapter = new InfoListBaseAdapter(mActivity, infoList, mShowSize);
+        mInfoRecyclerView.setAdapter(mInfoAdapter);
+        mInfoAdapter.notifyDataSetChanged();
+    }
+
+    private void requestTask() {
+        Log.i(TAG, "requestTask - 请求获取任务");
+        //判断用户是否已经登录
+        if (TextUtils.isEmpty(mUserId)) {
+            Toast.makeText(mActivity, "您尚未登录", Toast.LENGTH_SHORT);
+            return;
+        }
+        //请求获取任务
+        String url = RequestUrl.Task + "?pagenum=1"; //获取第一页任务
+        OkHttpHelper.getInstance().doGet(url, new OkHttpHelper.RequestCallback() {
+            @Override
+            public void onSuccess(String result) {
+                Log.d(TAG, "requestTask onSuccess 成功获取任务 - " + result);
+                mTaskList = GsonUtil.parseTaskJson(result);
+                if (mTaskList == null) {
+                    //从数据库中读取
+                    mTaskList = DataSupport.findAll(Task.class);
+                } else {
+                    //更新到数据库中
+                    DataSupport.deleteAll(Task.class);
+                    DataSupport.saveAll(mTaskList);
+                }
+                showTaskList(mTaskList);
+            }
+
+            @Override
+            public void onFailure(IOException e) {
+                Log.w(TAG, "requestTask onFailure 获取任务失败");
+                e.printStackTrace();
+                //从数据库中读取
+                mTaskList = DataSupport.findAll(Task.class);
+                //设置网络访问失败提示view可见
+                mFailedTip.setVisibility(View.VISIBLE);
+                showTaskList(mTaskList);
+            }
+        });
+    }
+
+    /**
+     * 展示任务列表
+     * @param taskList
+     */
+    private void showTaskList(List<Task> taskList) {
+        mTaskLayout.setVisibility(View.VISIBLE);
+        mTaskAdapter = new TaskListBaseAdapter(mActivity, taskList, mShowSize);
+        mTaskRecyclerView.setAdapter(mTaskAdapter);
+        mTaskAdapter.notifyDataSetChanged(); //更新页面
     }
 
     @Override
     public void onStart() {
         super.onStart();
         Log.d(TAG, "onStart - " + mFragmentName);
+        int[] outLocation = new int[]{0, 0};
+        mTaskRecyclerView.getLocationOnScreen(outLocation);
+        Log.w(TAG, "onStart - mTaskRecyclerView location=" + outLocation[0] + "," + outLocation[1]);
         //增加自动播放
         if (mTimer == null) {
             addAutoSlip();
@@ -169,12 +319,12 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
         mLinkUrls.add("http://blog.csdn.net/youyu_torch/article/details/74781768");
         mLinkUrls.add("http://blog.csdn.net/youyu_torch/article/details/75042823");
         mLinkUrls.add("http://blog.csdn.net/youyu_torch/article/details/75331971");
+
+        mUserId = SharePreUtil.GetShareString(mActivity, "userId");
     }
 
     private void initView(View view) {
         Log.d(TAG, "initView ...");
-        TextView content = (TextView) view.findViewById(R.id.tv);
-        content.setText(mFragmentName);
         mIndicatorLayout = (LinearLayout)view.findViewById(R.id.fragment_point_subscript);
 
         mViewPager = (ViewPager)view.findViewById(R.id.fragment_img_viewpager);
@@ -199,12 +349,48 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
                 return false;
             }
         });
+
+        mFailedTip = (LinearLayout) view.findViewById(R.id.rl_http_failed);
+        mFailedTip.setOnClickListener(this);
+        mLoadingProgress = (RelativeLayout) view.findViewById(R.id.message_fregment_progress);
+        mPartScrollView = (PartScrollView) view.findViewById(R.id.scroll_view);
+
+        mInfoDetailView = (TextView) view.findViewById(R.id.fragment_home_task_more);
+        mInfoDetailView.setOnClickListener(this);
+        mTaskDetailView = (TextView) view.findViewById(R.id.fragment_home_info_more);
+        mTaskDetailView.setOnClickListener(this);
+        mTaskLayout = (RelativeLayout) view.findViewById(R.id.home_fragment_task);
+        mNewShopView = (TextView) view.findViewById(R.id.fragment_sort_shop);
+        mNewShopView.setOnClickListener(this);
+        mNewVisitView = (TextView) view.findViewById(R.id.fragment_sort_visit);
+        mNewVisitView.setOnClickListener(this);
+        mTrainView = (TextView) view.findViewById(R.id.fragment_sort_train);
+        mTrainView.setOnClickListener(this);
+        mTaskRecyclerView = (RecyclerView) view.findViewById(R.id.fragment_home_task_list);
+        mInfoRecyclerView = (RecyclerView) view.findViewById(R.id.fragment_home_info_list);
+
+        LinearLayoutManager taskLayoutManager = new LinearLayoutManager(mActivity, LinearLayoutManager.VERTICAL, false);
+        mTaskRecyclerView.setLayoutManager(taskLayoutManager);
+        LinearLayoutManager infoLayoutManager = new LinearLayoutManager(mActivity, LinearLayoutManager.VERTICAL, false);
+        mInfoRecyclerView.setLayoutManager(infoLayoutManager);
+
+        //测试能否接收的MOVE事件
+        mInfoRecyclerView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                Log.w(TAG, "mInfoRecyclerView onTouch - 接收到事件" + event.getAction());
+                return false;
+            }
+        });
+
+        mTaskRecyclerView.setNestedScrollingEnabled(false);
+//        mInfoRecyclerView.setNestedScrollingEnabled(false);
     }
 
     /**
      * 获取广告轮播图
      */
-    private void getNoticeImgs() {
+    private void requestNoticeImgs() {
         //已发起过网络请求加载图片信息，则不需要重新加载
         if(mImageUrls != null && mImageUrls.size() > 0) {
             showNoticeImgs(mImageUrls);
@@ -346,6 +532,11 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
     private List<NoticeImage> getImgsFromLocal() {
         Log.d(TAG, "getImgsFromLocal - 从本地数据库获取图片地址列表");
         return DataSupport.findAll(NoticeImage.class);
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 
 

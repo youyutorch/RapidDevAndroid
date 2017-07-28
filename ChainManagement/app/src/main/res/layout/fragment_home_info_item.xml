@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/item_root_home"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/selectableItemBackground"
+    android:paddingBottom="@dimen/home_fragment_item_info_padding"
+    android:paddingTop="@dimen/home_fragment_item_info_padding">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cv"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:layout_marginRight="10dp"
+        app:cardCornerRadius="12dp">
+
+        <ImageView
+            android:id="@+id/fragment_home_info_item_img"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_launcher" />
+    </android.support.v7.widget.CardView>
+
+    <TextView
+        android:id="@+id/fragment_home_info_item_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/cv"
+        android:layout_marginTop="@dimen/bottom_img_padding"
+        android:layout_toEndOf="@+id/cv"
+        android:layout_toLeftOf="@+id/fragment_home_info_item_arrow"
+        android:layout_toRightOf="@+id/cv"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="Large Text"
+        android:textColor="@color/home_title_text_color"
+        android:textSize="@dimen/home_fragment_info_item_size" />
+
+    <TextView
+        android:id="@+id/fragment_home_info_item_context"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fragment_home_info_item_title"
+        android:layout_marginTop="@dimen/home_fragment_item_info_padding"
+        android:layout_toEndOf="@+id/cv"
+        android:layout_toLeftOf="@+id/fragment_home_info_item_arrow"
+        android:layout_toRightOf="@+id/cv"
+        android:maxLines="2"
+        android:text="Small Text"
+        android:textColor="@color/bottom_text_color"
+        android:textSize="@dimen/home_fragment_item_size" />
+
+    <ImageView
+        android:id="@+id/fragment_home_info_item_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/more_back_left"
+        android:src="@drawable/selector_item_img" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_below="@+id/cv"
+        android:layout_marginTop="5dp"
+        android:background="@color/gray_bg" />
+
+</RelativeLayout>

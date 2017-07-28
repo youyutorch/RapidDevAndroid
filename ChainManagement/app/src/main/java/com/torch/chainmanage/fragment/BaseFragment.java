@@ -20,6 +20,7 @@ import com.torch.chainmanage.R;
 public class BaseFragment extends Fragment {
     public static final String BUNDLE_NAME = "fragment_name";
     protected Activity mActivity;
+    protected Context mContext;
     protected String mFragmentName;
     protected final String TAG = this.getClass().getSimpleName();
 
@@ -27,6 +28,7 @@ public class BaseFragment extends Fragment {
     public void onAttach(Context context) {
         Log.d(TAG, "onAttach - " + mFragmentName);
         super.onAttach(context);
+        mContext = context;
     }
 
     @Override

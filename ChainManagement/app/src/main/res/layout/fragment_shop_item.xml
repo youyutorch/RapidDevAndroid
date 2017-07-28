@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/item_root_rl">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="@dimen/shop_activity_item_padding"
+        android:paddingBottom="@dimen/shop_activity_item_padding">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/activity_visit_shop_item_arrow"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/activity_visit_shop_item_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:text="店面名称:"
+                android:textColor="@color/bottom_text_color"
+                android:textSize="@dimen/home_fragment_info_item_size"
+                />
+            <TextView
+                android:id="@+id/activity_visit_shop_item_where"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:text="巡店地址:"
+                android:layout_marginTop="@dimen/shop_activity_item_top"
+                android:textColor="@color/shop_item_text_color"
+                android:textSize="@dimen/home_fragment_item_size"
+                />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/activity_visit_shop_item_arrow"
+            android:layout_marginLeft="@dimen/more_back_left"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/selector_item_img"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_alignParentBottom="true"
+        android:background="@color/gray_bg"/>
+
+</RelativeLayout>
